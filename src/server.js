@@ -123,7 +123,7 @@ new Date(dateFormat).toDateString())
 return Response.json(conta.statement)
 })
 
-app.delete("/conta/:cpf/", verificarExtrato, (Request, Response)=>{
+app.delete("/conta/:cpf", verificarExtrato, (Request, Response)=>{
     const {conta}= Request;
 
     contas.splice(conta, 1);
