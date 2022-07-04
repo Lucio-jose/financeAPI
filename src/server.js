@@ -123,6 +123,14 @@ new Date(dateFormat).toDateString())
 return Response.json(conta.statement)
 })
 
+app.delete("/conta/:cpf/", verificarExtrato, (Request, Response)=>{
+    const {conta}= Request;
+
+    contas.splice(conta, 1);
+
+    return Response.status(200).json({message:"Conta removida", contas})
+    
+    })
 app.listen(3033, ()=>{
     console.log("Servidor Rodando")
 })
