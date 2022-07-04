@@ -72,10 +72,6 @@ app.get("/extrato/:cpf", verificarExtrato, (Request, Response)=>{
 return Response.status(200).json(conta.statement)
 });
 
-app.get("/statement", verificarExtrato, (Request, Response)=>{
-
-})
-
 app.post("/deposit/:cpf", verificarExtrato, (Request, Response)=>{
 const {description, valor}=Request.body;
 
@@ -113,6 +109,18 @@ const statementOperation={
 
 conta.statement.push(statementOperation);
 return Response.status(201).send()
+})
+
+app.get("/statement/:cpf/:data", verificarExtrato, (Request, Response)=>{
+const {conta}= Request;
+const {data}= Request.query
+
+const dateFormat = new Date(date + '00:00')
+
+const statement = conta.statement.filter((statement)=>statement.created_at.toDateString()=== 
+new Date(dateFormat).toDateString())
+
+return Response.json(conta.statement)
 })
 
 app.listen(3033, ()=>{
